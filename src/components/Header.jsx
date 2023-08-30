@@ -60,8 +60,8 @@ const Header = () => {
 
     return (
         <>
-            <div className="absolute px-8 pb-2 w-full bg-gradient-to-b from-black z-10 flex justify-between">
-                <img className="w-28 relative bottom-1" src={MAIN_LOGO} alt="logo" />  
+            <div className="absolute px-8 pb-2 w-full bg-gradient-to-b from-black z-10 flex flex-col md:flex-row md:justify-between">
+                <img className="w-28 mx-auto md:mx-0 relative bottom-1" src={MAIN_LOGO} alt="logo" />  
                 {
                     user && (
                         <>
@@ -74,7 +74,7 @@ const Header = () => {
                                     </select>
                                 )}
                                 <button className="py-1 px-2 m-2 mr-4 font-semibold rounded-md bg-green-300" onClick={handleGptClick}>{showGptView ? <FontAwesomeIcon className="text-gray-800" icon={faHome} /> : "GPT +"}</button>
-                                <img className="w-8 h-8" src={user.photoUrl || COMMON_AVATAR} alt="usericon" />
+                                <img className="w-8 h-8 hidden md:block" src={user.photoUrl || COMMON_AVATAR} alt="usericon" />
                                 <button onClick={logout} className="py-1 px-2 m-2 mr-4 font-semibold rounded-md bg-red-700 text-white pl-2"><FontAwesomeIcon icon={faSignOut} /></button>
                             </div>
                         </>

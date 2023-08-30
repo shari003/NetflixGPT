@@ -10,7 +10,7 @@ const SecondaryBrowse = () => {
             {/* Each row below and each row has multiple cards depicing each movie of that row */}
             {/* Popular, NowPlaying, Trending, Horror */}
             <div className="bg-black">
-                <div className="-mt-52 pl-12 relative z-50">
+                <div className="mt-0 md:-mt-52 md:pl-12 relative z-50">
                     {movies && <main>
                         <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
                         <MovieList title={"Top Rated"} movies={movies.topRatedMovies} />

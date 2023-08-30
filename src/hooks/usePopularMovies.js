@@ -1,12 +1,14 @@
 import { API_GET_OPT } from "../utils/constants";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPopularMovies } from "../utils/movieSlice";
 
-const usePopularMovies = () => {
+const usePopularMovies = () => { 
 
     // For Browse Route
     const dispatch = useDispatch();
+
+    const popularMovies = useSelector(store => store.movies.popularMovies);
 
     useEffect(() => {
         const getPopularMovies = async() => {
@@ -18,8 +20,10 @@ const usePopularMovies = () => {
                 console.log(err.message);
             }
         };
-    
-        getPopularMovies();
+        
+        if(!popularMovies){
+            getPopularMovies();
+        }
     
     }, []); 
 

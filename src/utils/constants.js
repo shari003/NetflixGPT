@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+
+const {VITE_OPENAI_API_KEY} = import.meta.env;
+
 export const MAIN_LOGO = "img/logo-netflix.png";
 export const COMMON_AVATAR =
   "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png";
@@ -7,7 +11,7 @@ export const API_GET_OPT = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer " + process.env.REACT_APP_TMDB_API_KEY,
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNTdiNGRlZmUzN2NjYWZlNjU4YTI0YzAyMjJhMzU5MCIsInN1YiI6IjY0ZWViMDg2OTdhNGU2MDExYmFlOTg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U9KG2A95cEWv4iSYiX1eON-ty2IJPGRQDVUmCNtv2Z0",
   },
 };
 
@@ -22,4 +26,4 @@ export const SUPPORTED_LANGS = [
   {identifier: "spanish", name: "Spanish"},
 ];
 
-export const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+export const OPENAI_API_KEY = VITE_OPENAI_API_KEY;

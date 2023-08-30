@@ -9,7 +9,7 @@ const MovieCard = ({posterPath}) => {
 
     return (
         <>
-            <div className='w-48 h-auto pr-5 hover:opacity-40 hover:duration-150'>
+            <div className='w-36 md:w-48 h-auto pr-5 hover:opacity-40 hover:duration-150'>
                 <div className=''>
                     <img className='' src={POSTER_CDN+`/${posterPath}`} alt="movie-poster" />
                 </div>
