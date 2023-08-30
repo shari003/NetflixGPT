@@ -1,21 +1,77 @@
-import { useSelector } from "react-redux"
+/* eslint-disable no-unused-vars */
+import { useDispatch, useSelector } from "react-redux"
 import lang from "../../utils/languageConstants"
+import { useRef, useState } from "react";
+import openai from "../../utils/openAi";
+import { API_GET_OPT } from "../../utils/constants";
+import {addGptMovies} from "../../utils/gptSlice";
 
 
 const GptSearchBar = () => {
 
+    const dispatch = useDispatch();
     const language = useSelector(store => store.config.lang);
+    const searchText = useRef(null);
+    const [error, setError] = useState(false);
 
-    return (
-        <>
-            <div className="pt-[20%] flex justify-center">
-                <form className="bg-black w-1/2 grid grid-cols-12">
-                    <input type="text" className="p-2 m-4 col-span-10" placeholder={lang[language].gptSearchPlaceholder} />
-                    <button className="p-2 m-4 bg-green-500 text-white rounded-md col-span-2">{lang[language].search}</button>
-                </form>
-            </div>
-        </>
-    )
+    const searchMovieTmdb = async(movieName) => {
+        const data = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`, API_GET_OPT);
+
+        const json = await data.json();
+
+        return json.results;
+    }
+
+    const handleGptRequest = async() => {
+
+        // Request to GPT API
+        const gptQuery = "Act as a Movie Recommendation system and suggest me some movies for the query " + searchText.current.value + ". Only give me names of 5 movies, also give results in comma separated like the example given ahead. Example Result: Gadar, Sholay, Don, Jailer, Leo";
+
+        const completion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: gptQuery }],
+            model: 'gpt-3.5-turbo',
+        });
+
+        if(!completion.choices){
+            // Error Handling
+            setError(true);
+        }
+        setError(false);
+        console.log(completion?.choices[0]?.message?.content);
+
+        const gptMovies = completion?.choices[0]?.message?.content.split(",");
+
+        const promisesMovieData = gptMovies.map(movie => searchMovieTmdb(movie));
+
+        const gptMoviesData = await Promise.all(promisesMovieData);
+
+        console.log(gptMoviesData);
+
+        dispatch(addGptMovies({movieNames: gptMovies, movieData: gptMoviesData}));
+
+    }
+
+    
+
+    return error ? 
+        (
+            <>
+                <div className="pt-[20%] flex justify-center">
+                    <p className="p-6 rounded-2xl text-red-700 text-xl font-bold bg-black inline">Something went wrong! Please try again later.</p>
+                </div>
+            </>
+        ) : 
+        (
+            <>
+                <div className="pt-[20%] flex justify-center">
+                    <form className="bg-black w-1/2 grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
+                        <input ref={searchText} type="text" className="p-2 m-4 rounded-md col-span-10" placeholder={lang[language].gptSearchPlaceholder} />
+                        <button onClick={handleGptRequest} className="my-4 mr-4 bg-green-500 text-white rounded-md col-span-2">{lang[language].search}</button>
+                    </form>
+                    
+                </div>
+            </>
+        )
 }
 
 export default GptSearchBar
