@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Header from "./Header"
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
@@ -8,9 +9,7 @@ import SecondaryBrowse from "./browse/SecondaryBrowse";
 import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
 
-const Browse = () => {
-
-    const showGptView = useSelector(store => store.gpt.showGptSearch);    
+const Browse = () => { 
 
     useNowPlayingMovies();
     usePopularMovies();
@@ -20,7 +19,9 @@ const Browse = () => {
     return (
         <>
             <Header />
-            {
+            <MainBrowse />
+            <SecondaryBrowse />
+            {/* {
                 showGptView ? 
                 (
                     <GptSearch />
@@ -31,7 +32,7 @@ const Browse = () => {
                         <SecondaryBrowse />
                     </>
                 )
-            }
+            } */}
         </>
     )
 }

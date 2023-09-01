@@ -4,7 +4,7 @@ import Header from "./Header"
 import { checkData } from "../utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BG_GLOBAL } from "../utils/constants";
@@ -47,9 +47,9 @@ const Login = () => {
                             displayName: name.current.value
                         }).then(() => {
                             // updating the name after creating an account
+                            setErrorMsg(null);
                             const {uid, email, displayName, photoURL} = auth.currentUser;
                             dispatch(addUser({uid, email, displayName, photoURL}));
-                            setErrorMsg(null);
                         }).catch((error) => {
                             setErrorMsg(error);
                     });
@@ -68,8 +68,10 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
+                    const {uid, email, displayName, photoURL} = userCredential.user;
                     setErrorMsg(null);
+                    dispatch(addUser({uid, email, displayName, photoURL}));
+                    navigate('/browse');
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -105,11 +107,8 @@ const Login = () => {
                     {isSignIn ? "Sign In" : "Sign Up"}
                 </button>
 
-                {isSignIn ? (
-                    <p className="py-4">New to Netflix? <br /> <span className="cursor-pointer hover:underline" onClick={toggleForm}>Sign Up</span> Now!</p>
-                ) : (
-                    <p className="py-4">Already have an Account? <br /> <span className="cursor-pointer hover:underline" onClick={toggleForm}>Sign In</span> Now!</p>
-                )}
+                
+                <p className="py-4">New to Netflix? <br /> <span className="cursor-pointer hover:underline"><Link to={'/signup'}>Sign Up</Link></span> Now!</p>
                 
             </form>
         </>

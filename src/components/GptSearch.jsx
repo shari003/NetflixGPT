@@ -1,8 +1,13 @@
+import { useSelector } from "react-redux"
 import { BG_GLOBAL } from "../utils/constants"
 import GptMovieSuggestions from "./gpt/GptMovieSuggestions"
 import GptSearchBar from "./gpt/GptSearchBar"
+import ShimmerList from "./shimmer/ShimmerList"
 
 const GptSearch = () => {
+
+    const gptLoading = useSelector(store => store.gpt.gptLoading);
+
     return (
         <main>
             <div className="fixed -z-10">
@@ -10,8 +15,9 @@ const GptSearch = () => {
             </div>
             <main>
                 <GptSearchBar />
-                <GptMovieSuggestions />
-            </main>
+
+                {gptLoading ? (<ShimmerList />) : (<GptMovieSuggestions />)}
+                </main>
         </main>
     )
 }
