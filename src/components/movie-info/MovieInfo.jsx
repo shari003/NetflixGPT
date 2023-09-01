@@ -80,8 +80,8 @@ const MovieInfo = () => {
     return isError ? (<Navigate to="/not-found" replace={true} />) : (
         <>
             <Header />        
-            <main className="md:pt-[8%] pt-[40%] bg-gray-900 text-white md:pb-5">
-                <section className="flex">
+            <main className="md:pt-[8%] pt-[40%] bg-gray-900 text-white pb-5">
+                <section className="flex flex-col md:flex-row">
                     <MainInfo />
                     <MovieTrailer />
                 </section>

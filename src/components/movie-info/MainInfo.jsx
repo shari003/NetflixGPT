@@ -23,20 +23,20 @@ const MainInfo = () => {
     return (
         <>
             <div className="px-4 py-1 mr-3 flex flex-col">
-                <div className='w-56'>
+                <div className='w-56 md:mx-0 mx-auto'>
                     <div>
                         <img src={POSTER_CDN+`/${posterPath}`} alt="" />
                     </div>
                 </div>
-                <section className='text-left w-72  pt-4'>
-                    <h1 className='font-semibold text-xl'>{title}</h1>
+                <section className='text-left md:w-72 w-full pt-4'>
+                    <h1 className='font-semibold md:text-2xl text-xl'>{title}</h1>
                     <div className='flex'>
-                        <h2 className='text-xs'>{runtime} min</h2>
+                        <h2 className='md:text-sm text-xs pt-1'>{runtime} min</h2>
                     </div>
-                    <p className='pt-6 text-xs'>
+                    <p className='pt-6 md:text-base text-sm'>
                         {overview}
                     </p>
-                    <div className='pt-6 text-xs'>
+                    <div className='pt-6 text-sm'>
                         <div className='flex my-2'>
                             <div className='min-w-[6rem]'>Type: </div>
                             <span>Movie</span>
@@ -77,7 +77,7 @@ const MainInfo = () => {
                         </div>
                     </div>
                 </section>
-                <section className='pt-4'>
+                <section className='pt-4 w-full'>
                     <div className='bg-gray-800 flex flex-col p-4'>
                         <div className='mx-auto'>
                             <FontAwesomeIcon className='mx-1' icon={faStar}/>
