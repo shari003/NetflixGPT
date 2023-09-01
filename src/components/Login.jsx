@@ -15,16 +15,10 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [isSignIn, setIsSignIn] = useState(true);
     const [errorMsg, setErrorMsg] = useState(null);
 
     const email = useRef(null);
     const password = useRef(null);
-    const name = useRef(null);
-
-    const toggleForm = async() => {
-        setIsSignIn(!isSignIn);
-    }
 
     const handleSubmit = async(ev) => {
         ev.preventDefault();
@@ -34,53 +28,20 @@ const Login = () => {
         setErrorMsg(msg);
 
         if(msg) return;
-
-        // here to login or singup
-        if(!isSignIn){
-            // SIGN UP Form
-            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-                .then((userCredential) => {
-                    // Signed in 
-                    const user = userCredential.user;
-                    updateProfile(user, 
-                        {
-                            displayName: name.current.value
-                        }).then(() => {
-                            // updating the name after creating an account
-                            setErrorMsg(null);
-                            const {uid, email, displayName, photoURL} = auth.currentUser;
-                            dispatch(addUser({uid, email, displayName, photoURL}));
-                        }).catch((error) => {
-                            setErrorMsg(error);
-                    });
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    setErrorMsg(errorCode + " - " + errorMessage);
-                });
-
-
-
-        } else {
-            // SIGN IN Form
-
-            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-                .then((userCredential) => {
-                    // Signed in 
-                    const {uid, email, displayName, photoURL} = userCredential.user;
-                    setErrorMsg(null);
-                    dispatch(addUser({uid, email, displayName, photoURL}));
-                    navigate('/browse');
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    setErrorMsg(errorCode + " - " + errorMessage);
-                });
-
-
-        }
+        
+        signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+            .then((userCredential) => {
+                // Signed in 
+                const {uid, email, displayName, photoURL} = userCredential.user;
+                setErrorMsg(null);
+                dispatch(addUser({uid, email, displayName, photoURL}));
+                navigate('/');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMsg(errorCode + " - " + errorMessage);
+            });
 
     }
 
@@ -92,19 +53,17 @@ const Login = () => {
             </div>
             <form onSubmit={handleSubmit} className="absolute md:w-3/12 p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80">
                 <h1 className="font-bold text-3xl py-4">
-                    {isSignIn ? "Sign In" : "Sign Up"}
+                    Sign In
                 </h1>
-                {!isSignIn && (
-                    <input type="text" placeholder="Full Name" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={name}/>
-                )}
+                
                 <input type="email" placeholder="Email Address" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={email} />
 
                 <input type="password" placeholder="Password" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={password}/>
 
-                {errorMsg!==null &&  <p className="text-red-700 font-bold text-lg py-2">{errorMsg}</p>}
+                {errorMsg !== null &&  <p className="text-red-700 font-bold text-lg py-2">{errorMsg}</p>}
 
                 <button className="p-3 my-6 bg-red-700 w-full rounded-lg">
-                    {isSignIn ? "Sign In" : "Sign Up"}
+                    Sign In
                 </button>
 
                 

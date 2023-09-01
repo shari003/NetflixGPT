@@ -9,6 +9,7 @@ import MovieInfo from './movie-info/MovieInfo'
 import  UnprotectedRoutes from './UnprotectedRoutes'
 import { useSelector } from 'react-redux'
 import NotFound from './NotFound'
+import Home from './Home'
 
 const Body = () => {
 
@@ -23,22 +24,31 @@ const Body = () => {
     //     }
     // ]);
 
-    
+    const user = useSelector(store => store.user);
 
     return (
         <>
             {/* <RouterProvider router={appRouter} /> */}
             <BrowserRouter>
                 <Routes>
-                    <Route element={<PrivateRoutes />}>
-                        <Route element={<Browse />} path='/browse' exact/>
-                        <Route element={<GptMain />} path='/gptplus' exact/>
-                    </Route>
-                    <Route element={<UnprotectedRoutes />}>
-                        <Route element={<Login />} path='/login' exact/>
-                        <Route element={<Signup />} path='/signup' exact/>
-                    </Route>
-                    <Route element={<MovieInfo />} path='/movie/:id'/>
+                    <Route path="/" element={<Home />} />
+                    {/* Auth Routes */}
+                    <Route element={<Login />} path='/login' exact/>
+                    <Route element={<Signup />} path='/signup' exact/>
+                    {/* Protected Routes */}
+                    {user && 
+                        (
+                            <>
+                                <Route element={<Browse />} path='/browse' exact/>
+                                <Route element={<GptMain />} path='/gptplus' exact/>
+                                <Route element={<MovieInfo />} path='/movie/:id' exact/>
+                            </>
+                        )
+                    }
+                    
+                    {/* <Route element={<PrivateRoutes />}>
+                    </Route> */}
+                    
                     <Route path="/not-found" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/not-found" replace={true} />} />
                 </Routes>

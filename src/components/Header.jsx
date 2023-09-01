@@ -29,10 +29,10 @@ const Header = () => {
                 dispatch(removeGptMovies());
                 dispatch(disableGptSearchView());
                 dispatch(setGptLoading(false));
-                navigate('/login');
+                navigate('/');
             })
             .catch((error) => {
-                navigate('/error');
+                navigate('/not-found');
             });
     }
 
