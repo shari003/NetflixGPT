@@ -22,8 +22,6 @@ const Header = () => {
 
     const user = useSelector(store => store.user);
 
-    console.log(user.uid);
-
     const showGptView = useSelector(store => store.gpt.showGptSearch);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -83,7 +81,7 @@ const Header = () => {
     }   
 
     const handleLogoClick = () => {
-        if(user){
+        if(user.uid){
             navigate('/browse'); 
             dispatch(disableGptSearchView());
             return;
@@ -96,7 +94,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="absolute px-8 pb-2 w-full bg-gradient-to-b from-black z-10 flex flex-col md:flex-row md:justify-between">
+            <div className="fixed px-8 pt-8 pb-2 w-full bg-gradient-to-b from-black bg-gray-900 z-[90] flex flex-col md:flex-row md:justify-between">
                 <img className="w-28 mx-auto md:mx-0 relative bottom-1 cursor-pointer" src={MAIN_LOGO} alt="logo" onClick={handleLogoClick} />  
                 {
                     (user.uid !== '' && user.email !== '') && (

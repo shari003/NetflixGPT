@@ -2,7 +2,8 @@
 
 const {VITE_OPENAI_API_KEY, VITE_TMDB_API_KEY} = import.meta.env;
 
-export const MAIN_LOGO = "/img/logo-netflix.png";
+// export const MAIN_LOGO = "/img/logo-netflix.png";
+export const MAIN_LOGO = "/img/logo-jetflix.png";
 export const COMMON_AVATAR =
   "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png";
 
