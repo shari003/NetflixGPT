@@ -36,7 +36,7 @@ const Body = () => {
                     <Route element={<Login />} path='/login' exact/>
                     <Route element={<Signup />} path='/signup' exact/>
                     {/* Protected Routes */}
-                    {user && 
+                    {user.uid && user.email && 
                         (
                             <>
                                 <Route element={<Browse />} path='/browse' exact/>

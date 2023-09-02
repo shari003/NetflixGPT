@@ -18,13 +18,13 @@ const Home = () => {
                     <h1 className='text-4xl font-semibold'>
                         Welcome
                         {
-                            user ? (<span>, {user.displayName}</span>) : (", to JETFLIX")
+                            (user.uid && user.email) ? (<span>, {user.displayName}</span>) : (", to JETFLIX")
                         }
                     </h1>
                     
                     <div className='flex w-full pt-12 justify-center'>
                         {
-                            !user ? (
+                            !(user.uid && user.email) ? (
                                 <>
                                     <button className='block border border-solid bg-white text-red-700 text-xl border-red-700 py-2 px-4 hover:bg-red-700 hover:text-white duration-300 mr-2' onClick={() => navigate('/login')}>Sign In</button>
                                     <button className='block border border-solid border-white py-2 px-4 bg-red-700 text-white hover:bg-white hover:text-red-700 text-xl duration-300 ml-2' onClick={() => navigate('/signup')}>Sign Up</button>

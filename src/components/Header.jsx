@@ -14,10 +14,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeLanguage } from "../utils/configSlice";
 import {toggleGptSearchView, removeGptMovies, disableGptSearchView, setGptLoading} from '../utils/gptSlice';
 import {addUser, removeUser} from '../utils/userSlice';
+import {removeMovieInfo} from '../utils/movieSlice';
+
+import setLocalStorage from '../utils/localStorageFunc';
 
 const Header = () => {
 
     const user = useSelector(store => store.user);
+
+    console.log(user.uid);
+
     const showGptView = useSelector(store => store.gpt.showGptSearch);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,10 +31,14 @@ const Header = () => {
     const logout = () => {
         signOut(auth)
             .then(() => {
+                setLocalStorage("", "", "", "");
+                
                 dispatch(removeUser());
                 dispatch(removeGptMovies());
                 dispatch(disableGptSearchView());
+                dispatch(removeMovieInfo());
                 dispatch(setGptLoading(false));
+                
                 navigate('/');
             })
             .catch((error) => {
@@ -42,6 +52,9 @@ const Header = () => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
                 const {uid, email, displayName, photoURL} = user;
+
+                setLocalStorage(uid, email, displayName, photoURL);
+
                 dispatch(addUser({uid, email, displayName, photoURL}));
                 // User Signed in redirect to protected route
                 
@@ -69,12 +82,24 @@ const Header = () => {
         dispatch(changeLanguage(e.target.value));
     }   
 
+    const handleLogoClick = () => {
+        if(user){
+            navigate('/browse'); 
+            dispatch(disableGptSearchView());
+            return;
+        }
+        
+        navigate('/');
+        dispatch(disableGptSearchView());
+
+    }
+
     return (
         <>
             <div className="absolute px-8 pb-2 w-full bg-gradient-to-b from-black z-10 flex flex-col md:flex-row md:justify-between">
-                <img className="w-28 mx-auto md:mx-0 relative bottom-1 cursor-pointer" src={MAIN_LOGO} alt="logo" onClick={() => {navigate('/browse'); dispatch(disableGptSearchView());}} />  
+                <img className="w-28 mx-auto md:mx-0 relative bottom-1 cursor-pointer" src={MAIN_LOGO} alt="logo" onClick={handleLogoClick} />  
                 {
-                    user && (
+                    (user.uid !== '' && user.email !== '') && (
                         <>
                             <div className="flex items-center justify-between"> 
                                 {showGptView && (

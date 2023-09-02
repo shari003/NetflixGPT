@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BG_GLOBAL } from "../utils/constants";
-
+import setLocalStorage from "../utils/localStorageFunc";
 
 const Login = () => {
     
@@ -34,6 +34,9 @@ const Login = () => {
                 // Signed in 
                 const {uid, email, displayName, photoURL} = userCredential.user;
                 setErrorMsg(null);
+                
+                setLocalStorage(uid, email, displayName, photoURL);
+                
                 dispatch(addUser({uid, email, displayName, photoURL}));
                 navigate('/');
             })
