@@ -70,7 +70,7 @@ const Login = () => {
                 </button>
 
                 
-                <p className="py-4">New to Netflix? <br /> <span className="cursor-pointer hover:underline"><Link to={'/signup'}>Sign Up</Link></span> Now!</p>
+                <p className="py-4">New to JETFLIX? <br /> <span className="cursor-pointer hover:underline"><Link to={'/signup'}>Sign Up</Link></span> Now!</p>
                 
             </form>
         </>
