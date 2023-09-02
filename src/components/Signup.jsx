@@ -69,11 +69,10 @@ const Login = () => {
 
                 <input type="text" placeholder="Full Name" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={name}/>
                 <input type="email" placeholder="Email Address" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={email} />
-                <input type="password" placeholder="Password" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={password}/>
+                <input type="password" placeholder="Password (Min. 8 characters)" className="p-4 my-4 w-full bg-gray-800 rounded-md" ref={password}/>
 
-                <div className="text-sm p-4">
+                <div className="text-xs p-4">
                     <ul className="list-disc">
-                        <li className="py-2">Password Minimum 8 characters</li>
                         <li className="py-2">Password should consist of a Numeric, Uppercase, Lowercase and Special Characters</li>
                     </ul>
                 </div>
