@@ -43,7 +43,7 @@ const Login = () => {
                         // updating the name after creating an account
                         const {uid, email, displayName, photoURL} = auth.currentUser;
                         setErrorMsg(null);
-                        navigate('/login');
+                        navigate('/');
                     }).catch((error) => {
                         setErrorMsg(error);
                 });
