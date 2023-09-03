@@ -11,22 +11,10 @@ import Home from './Home'
 
 const Body = () => {
 
-    // const appRouter = createBrowserRouter([
-    //     {
-    //         path: "/",
-    //         element: <Login />
-    //     },
-    //     {
-    //         path: "/browse",
-    //         element: <Browse />
-    //     }
-    // ]);
-
     const user = useSelector(store => store.user);
 
     return (
         <>
-            {/* <RouterProvider router={appRouter} /> */}
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -43,9 +31,6 @@ const Body = () => {
                             </>
                         )
                     }
-                    
-                    {/* <Route element={<PrivateRoutes />}>
-                    </Route> */}
                     
                     <Route path="/not-found" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/not-found" replace={true} />} />

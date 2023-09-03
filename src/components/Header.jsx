@@ -109,9 +109,9 @@ const Header = () => {
                                 )}
                                 {
                                     !showGptView ? (
-                                        <button className="py-1 px-2 m-2 mr-4 font-semibold rounded-md bg-green-300" onClick={handleGptClick}>GPT+</button>
+                                        <button className="py-1 px-2 m-2 mr-4 font-bold rounded-md bg-green-400" onClick={handleGptClick}>GPT+</button>
                                     ) : (
-                                        <button className="py-1 px-2 m-2 mr-4 font-semibold rounded-md bg-green-300" onClick={handleHomeClick}><FontAwesomeIcon className="text-gray-800" icon={faHome} /></button>
+                                        <button className="py-1 px-2 m-2 mr-4 font-semibold rounded-md bg-green-400" onClick={handleHomeClick}><FontAwesomeIcon className="text-gray-800" icon={faHome} /></button>
                                     )
                                 }
 

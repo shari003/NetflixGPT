@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import MainInfo from "./MainInfo";
 import MovieTrailer from "./MovieTrailer";
 import { Navigate, useParams } from "react-router-dom";
+import Footer from "../Footer";
 
 const MovieInfo = () => {
 
@@ -86,6 +87,7 @@ const MovieInfo = () => {
                     <MovieTrailer />
                 </section>
             </main>
+            <Footer/>
         </>
     )
 }
