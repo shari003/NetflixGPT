@@ -2,12 +2,15 @@
 import { useSelector } from "react-redux"
 import VideoTitle from "./VideoTitle";
 import VideoBG from "./VideoBG";
+import Loading from "../shimmer/Loading";
 
 const MainBrowse = () => {
 
     const movies = useSelector(store => store.movies?.nowPlayingMovies);
 
-    if(!movies) return;
+    if(!movies) return (
+        <Loading />
+    );
 
     const mainMovie = movies[0];
 

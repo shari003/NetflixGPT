@@ -4,13 +4,16 @@ import { POSTER_CDN } from '../../utils/constants'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import Loading from '../shimmer/Loading';
 
 const MainInfo = () => {
 
     const movieDetails = useSelector(store => store.movies.movieInfo.movieDetails);
     const castDetails = useSelector(store => store.movies.movieInfo.castInfo);
 
-    if(!movieDetails || !castDetails) return null;
+    if(!movieDetails || !castDetails) return (
+        <Loading />
+    );
 
     const {poster_path: posterPath, title, runtime, overview, production_countries, production_companies, genres, release_date, vote_average, vote_count} = movieDetails;
 
