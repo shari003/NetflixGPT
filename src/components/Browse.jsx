@@ -6,7 +6,7 @@ import usePopularMovies from "../hooks/usePopularMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import MainBrowse from "./browse/MainBrowse";
 import SecondaryBrowse from "./browse/SecondaryBrowse";
-import GptSearch from "./GptSearch";
+import GptSearch from "./gpt/GptSearch";
 import { useSelector } from "react-redux";
 
 const Browse = () => { 

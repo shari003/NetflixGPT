@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Header from "../Header"
 import { API_GET_OPT } from "../../utils/constants";
-import {addMovieInfo, addCastInfo, addMovieTrailers} from '../../utils/movieSlice';
+import {addMovieInfo, addCastInfo, addMovieTrailers} from '../../utils/Redux/slices/movieSlice';
 import { useDispatch } from "react-redux";
 import MainInfo from "./MainInfo";
 import MovieTrailer from "./MovieTrailer";

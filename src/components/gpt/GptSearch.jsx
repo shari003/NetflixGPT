@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
-import { BG_GLOBAL } from "../utils/constants"
-import GptMovieSuggestions from "./gpt/GptMovieSuggestions"
-import GptSearchBar from "./gpt/GptSearchBar"
-import ShimmerList from "./shimmer/ShimmerList"
+import { BG_GLOBAL } from "../../utils/constants"
+import GptMovieSuggestions from "./GptMovieSuggestions"
+import GptSearchBar from "./GptSearchBar"
+import ShimmerList from "../shimmer/ShimmerList"
 
 const GptSearch = () => {
 

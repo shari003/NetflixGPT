@@ -1,4 +1,4 @@
-import GptSearch from "./GptSearch"
+import GptSearch from "./gpt/GptSearch"
 import Header from "./Header"
 
 const GptMain = () => {

@@ -11,10 +11,10 @@ import { COMMON_AVATAR, MAIN_LOGO, SUPPORTED_LANGS } from "../utils/constants";
 
 // Slice imports
 import { useDispatch, useSelector } from 'react-redux';
-import { changeLanguage } from "../utils/configSlice";
-import {toggleGptSearchView, removeGptMovies, disableGptSearchView, setGptLoading} from '../utils/gptSlice';
-import {addUser, removeUser} from '../utils/userSlice';
-import {removeMovieInfo} from '../utils/movieSlice';
+import { changeLanguage } from "../utils/Redux/slices/configSlice";
+import {toggleGptSearchView, removeGptMovies, disableGptSearchView, setGptLoading} from '../utils/Redux/slices/gptSlice';
+import {addUser, removeUser} from '../utils/Redux/slices/userSlice';
+import {removeMovieInfo} from '../utils/Redux/slices/movieSlice';
 
 import setLocalStorage from '../utils/localStorageFunc';
 

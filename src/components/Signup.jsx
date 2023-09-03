@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "../utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../utils/Redux/slices/userSlice";
 import { BG_GLOBAL } from "../utils/constants";
 
 

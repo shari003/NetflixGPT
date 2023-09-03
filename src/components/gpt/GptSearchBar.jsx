@@ -4,7 +4,7 @@ import lang from "../../utils/languageConstants"
 import { useRef, useState } from "react";
 import openai from "../../utils/openAi";
 import { API_GET_OPT } from "../../utils/constants";
-import {addGptMovies, setGptLoading} from "../../utils/gptSlice";
+import {addGptMovies, setGptLoading} from "../../utils/Redux/slices/gptSlice";
 
 
 const GptSearchBar = () => {
